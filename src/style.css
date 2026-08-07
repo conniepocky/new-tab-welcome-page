@@ -2,6 +2,7 @@ body {
   font-family: "Elms Sans", sans-serif;
   margin: 0;
   position: relative;
+  overflow: hidden;
 }
 
 .titles-container {
