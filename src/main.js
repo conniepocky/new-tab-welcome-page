@@ -1,6 +1,15 @@
 const API_KEY = import.meta.env.VITE_NASA_API_KEY;
 
 const currentTime = new Date().toLocaleTimeString();
+let clockIntervalId;
+
+function updateClock() {
+  const timeElement = document.querySelector("h1");
+
+  if (timeElement) {
+    timeElement.textContent = new Date().toLocaleTimeString();
+  }
+}
 
 fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
   .then((response) => {
@@ -20,21 +29,22 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
 
       document.querySelector("#app").innerHTML = `
           <div class="container">
-            <h1>${currentTime}</h1>
-            <h2>${data.title}</h2>
+            <section class="titles-container child">
+              <h1>${currentTime}</h1>
+              <h2>${data.title}</h2>
+            </section>
+            <section class="media-container child">
+              ${media}
+              <p>${data.explanation}</p>
+            </section>
           </div>
-          ${media}
-          <p>${data.explanation}</p>
       `;
+
+      updateClock();
+      clearInterval(clockIntervalId);
+      clockIntervalId = setInterval(updateClock, 1000);
   })
   .catch((error) => {
     console.error(error);
     document.querySelector("#app").innerHTML = `<p>Error: ${error.message}</p>`;
   });
-
-// update the time every second
-
-setInterval(() => {
-  const newTime = new Date().toLocaleTimeString();
-  document.querySelector("h1").textContent = newTime;
-}, 1000);
