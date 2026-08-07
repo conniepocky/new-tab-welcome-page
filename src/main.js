@@ -30,12 +30,16 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
       document.querySelector("#app").innerHTML = `
           <div class="container">
             <section class="titles-container child">
-              <h1>${currentTime}</h1>
-              <h2>${data.title}</h2>
+              <div class="content">
+                <h1>${currentTime}</h1>
+                <h2>${data.title}</h2>
+              </div>
             </section>
             <section class="media-container child">
-              ${media}
-              <p>${data.explanation}</p>
+              <div class="content">
+                ${media}
+                <p>${data.explanation}</p>
+              </div>
             </section>
           </div>
       `;
@@ -48,3 +52,24 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
     console.error(error);
     document.querySelector("#app").innerHTML = `<p>Error: ${error.message}</p>`;
   });
+
+// cursor animation
+
+window.addEventListener('mousemove', function(e) {
+  var arr = [1, 0.9, 0.8, 0.5, 0.2]; 
+
+  arr.forEach(function(i) {
+    var x = (1 - i) * 75; // distance from cursor
+    var star = document.createElement('div');
+
+    star.className = 'star';
+    star.style.top = e.pageY + Math.round(Math.random() * x - x / 2) + 'px'; 
+    star.style.left = e.pageX + Math.round(Math.random() * x - x / 2) + 'px';
+
+    document.body.appendChild(star);
+
+    window.setTimeout(function() {
+      document.body.removeChild(star);
+    }, Math.round(Math.random() * i * 600));
+  });
+}, false);

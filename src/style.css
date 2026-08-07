@@ -6,21 +6,49 @@ body {
 
 .titles-container {
   text-align: center;
-  max-width: 800px;
+  width: 100%;
   font-size: 1.5rem;
   margin: 0 auto;
   padding: 5px;
-  color: #98E8DE;
-  background-color: #4E1F6E;
+  color: #B5B9F0;
+  background-color: #0B0909;
 }
 
 .media-container {
   display: flex;
   padding: 5px;
   text-align: center;
-  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
-  background-color: #3E3E75;
+  background-color: #15173D;
+  color: #E491C9;
+}
+
+.content {
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+p {
+  font-style: italic;
+}
+
+#galaxy{
+  max-width: 50%;
+  height: auto;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
+  will-change: transform;
+	position: relative;
+	z-index: 2;
+  display: block;
+  margin: 0 auto;
+}
+
+#galaxy:hover {
+  transform: scale(1.06);
+	z-index: 9;
 }
 
 .container {
@@ -44,28 +72,6 @@ h1 {
   margin-bottom: 1rem;
 }
 
-p {
-  color: #45A9A9;
-  font-style: italic;
-}
-
-#galaxy{
-  max-width: 50%;
-  height: auto;
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  transform-origin: center;
-  will-change: transform;
-	position: relative;
-	z-index: 2;
-  display: block;
-  margin: 0 auto;
-}
-
-#galaxy:hover {
-  transform: scale(1.06);
-	z-index: 9;
-}
-
 @media (max-width: 600px) {
   body::before, body::after {
     display: none;
@@ -74,4 +80,28 @@ p {
   #app {
     padding: 1rem;
   }
+}
+
+.star {
+	position: fixed;
+	pointer-events: none;
+}
+
+.star:before, .star:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: '\2726';
+	font-size: 9px;
+}
+
+.star:before {
+	color: transparent;
+	text-shadow: 0 0 3px rgb(250, 250, 174);
+}
+
+.star:after {
+	background: rgb(246, 246, 153);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
