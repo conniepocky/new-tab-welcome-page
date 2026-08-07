@@ -1,0 +1,55 @@
+body {
+  font-family: "Elms Sans", sans-serif;
+  padding: 2rem 0;
+  position: relative;
+  background-color: #3E3E75;
+}
+
+.container {
+  text-align: center;
+  max-width: 800px;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  color: #98E8DE;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+p {
+  color: #45A9A9;
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+#galaxy{
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
+  will-change: transform;
+	position: relative;
+	z-index: 2;
+  display: block;
+  margin: 0 auto;
+}
+
+#galaxy:hover {
+  transform: scale(1.06);
+	z-index: 9;
+}
+
+@media (max-width: 600px) {
+  body::before, body::after {
+    display: none;
+  }
+
+  #app {
+    padding: 1rem;
+  }
+}
