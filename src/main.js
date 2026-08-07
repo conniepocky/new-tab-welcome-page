@@ -27,11 +27,19 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
           media = `<video id="galaxy" src="${data.url}" controls></video>`;
       }
 
+      let searchBar = `
+        <div class="search-bar">
+          <input class="search-input" type="text" placeholder="Search the web..." />
+          <button class="search-btn" type="submit">Search</button>
+        </div>
+      `;
+
       document.querySelector("#app").innerHTML = `
           <div class="container">
             <section class="titles-container child">
               <div class="content">
                 <h1>${currentTime}</h1>
+                ${searchBar}
                 <h2>${data.title}</h2>
               </div>
             </section>
@@ -44,7 +52,30 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
           </div>
       `;
 
-      updateClock();
+      // handle search bar functionality
+
+      const searchInput = document.querySelector(".search-bar input");
+      const searchButton = document.querySelector(".search-bar button");
+
+      if (searchInput && searchButton) {
+        const runSearch = () => {
+          const query = searchInput.value.trim();
+
+          if (query) {
+            window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
+          }
+        };
+
+        searchButton.addEventListener("click", runSearch);
+
+        searchInput.addEventListener("keypress", (event) => {
+          if (event.key === "Enter") {
+            runSearch();
+          }
+        });
+      }
+
+      updateClock(); // update clock immediately on load
       clearInterval(clockIntervalId);
       clockIntervalId = setInterval(updateClock, 1000);
   })
@@ -70,6 +101,6 @@ window.addEventListener('mousemove', function(e) {
 
     window.setTimeout(function() {
       document.body.removeChild(star);
-    }, Math.round(Math.random() * i * 600));
+    }, Math.round(Math.random() * i * 600)); // remove star after a random time
   });
 }, false);
